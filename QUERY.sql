@@ -145,4 +145,22 @@ FROM
     Users AS u
 LEFT JOIN
     Bookings AS b
-    ON u.user_id = b.user_id; 
+    ON u.user_id = b.user_id;
+
+-- Query 6: Find all ticket bookings where the total cost is
+-- greater than the average total cost of all bookings using a subquery.
+
+SELECT
+    booking_id,
+    match_id,
+    total_cost
+FROM
+    Bookings
+WHERE
+    total_cost > (
+        SELECT
+            AVG(total_cost)
+        FROM
+            Bookings
+    ); 
+
