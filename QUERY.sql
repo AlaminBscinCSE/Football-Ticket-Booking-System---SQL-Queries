@@ -87,7 +87,7 @@ SELECT
     fixture,
     base_ticket_price
 FROM
-    matches
+    Matches
 WHERE
     tournament_category = 'Champions League'
     AND match_status = 'Available'
@@ -106,3 +106,14 @@ WHERE
     full_name ILIKE 'Tanvir%'
     OR full_name ILIKE '%Haque%';
 
+-- Query 3: Retrieve all booking records where the payment status is NULL
+-- and display 'Action Required' instead of NULL using COALESCE().
+SELECT
+    booking_id,
+    user_id,
+    match_id,
+    coalesce(payment_status, 'Action Required') AS systematic_status
+FROM
+    Bookings
+WHERE
+    payment_status IS NULL
